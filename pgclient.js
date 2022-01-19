@@ -12,7 +12,7 @@ const server = http.createServer((req, res) => {
     res.statusCode = 200;
     res.setHeader({
         'content-type': 'text/plain', 
-        'host': 'https://rute-map.herokuapp.com', 
+        'host': 'rute-map.herokuapp.com', 
         'accept': '*'
     });
     res.end('Hello World');
