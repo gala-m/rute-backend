@@ -64,6 +64,13 @@ app.get('/', function (req, res) {
     res.send('home')
 }) */
 
+app.get('/data/please',  (req, res) => res.send(showTimes()))
+
+showTimes = () => {
+  let result = '18:54';
+  return result;
+}
+
 app.get('/data/points', function (req, res) {
 
     setCross(res)
