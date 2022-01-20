@@ -71,6 +71,8 @@ showTimes = () => {
   return result;
 }
 
+path.resolve('data', '../data/ranks.geojson')
+
 app.get('/data/points', function (req, res) {
 
     setCross(res)
