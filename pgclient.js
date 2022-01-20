@@ -12,7 +12,7 @@ const server = http.createServer((req, res) => {
     res.statusCode = 200;
     res.setHeader(
         'Content-Security-Policy-Report-Only',
-        "default-src 'self'; font-src 'self'; img-src 'self'; script-src 'self'; style-src 'self'; frame-src 'self'",
+        "default-src 'none'",
         {
             'content-type': 'text/plain', 
             'host': '0.0.0.0'
