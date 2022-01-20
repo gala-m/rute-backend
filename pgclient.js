@@ -12,7 +12,7 @@ const server = http.createServer((req, res) => {
     res.statusCode = 200;
     res.setHeader(
         'Content-Security-Policy',
-        "default-src 'none'",
+        "default-src 'none' ranks.geojson",
         {
             'content-type': 'text/plain', 
             'host': '0.0.0.0'
