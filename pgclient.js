@@ -71,7 +71,7 @@ showTimes = () => {
   return result;
 }
 
-path.resolve('data', '../data/ranks.geojson')
+path.resolve('data', './data/ranks.geojson')
 
 app.get('/data/points', function (req, res) {
 
@@ -97,13 +97,13 @@ app.get('/data/points', function (req, res) {
 app.get('/data/routes3', function (req, res) {
 
     setCross(res)
-    res.sendFile(path.join(__dirname, '../data', 'routes3.geojson'));
+    res.sendFile(path.join(__dirname, './data', 'routes3.geojson'));
 })
 
 app.get('/data/ranks', function (req, res) {
 
     setCross(res)
-    res.sendFile(path.join(__dirname, '../data', 'ranks.geojson'));
+    res.sendFile(path.join(__dirname, './data', 'ranks.geojson'));
 })
 
 app.post('/saver', function (req, res) {
