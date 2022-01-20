@@ -48,6 +48,7 @@ PG.prototype.getConnection = function () {
 //@param callback CB 
 var clientHelper = function (str, cb) {
     pool.query(str, function (err, result) {
+        console.log("client helper is running")
         if (err) {
             //cb("kip");
             console.log("client helper error: " + err);
@@ -64,13 +65,16 @@ var clientHelper = function (str, cb) {
 }
 
 PG.prototype.exec = function (strSql, resHolder) {
+    console.log("exec is running")
     pool.query(strSql, "", function (err, result) {
+        console.log("pool query is running")
         if (err) {
             resHolder("err");
             console.log("exec error: " + err);
         } else {
             // console.log("client helper: " + result)
             if (result.rows != undefined) {
+                console.log(result.rows)
                 resHolder(result.rows);
                 
             } else {
