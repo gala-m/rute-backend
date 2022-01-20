@@ -15,8 +15,7 @@ const server = http.createServer((req, res) => {
         "default-src 'self'; font-src 'self'; img-src 'self'; script-src 'self'; style-src 'self'; frame-src 'self'",
         {
             'content-type': 'text/plain', 
-            'host': '0.0.0.0', 
-            'accept': '*'
+            'host': '0.0.0.0'
         }
     );
     res.end('Hello World');
