@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 5000;
 const server = http.createServer((req, res) => {
     res.statusCode = 200;
     res.setHeader(
-        'Content-Security-Policy-Report-Only',
+        'Content-Security-Policy',
         "default-src 'none'",
         {
             'content-type': 'text/plain', 
@@ -85,13 +85,13 @@ app.get('/data/points', function (req, res) {
     })
 })
 
-app.get('/data/routes3.geojson', function (req, res) {
+app.get('/data/routes3', function (req, res) {
 
     setCross(res)
     res.sendFile(path.join(__dirname, '../data', 'routes3.geojson'));
 })
 
-app.get('/data/ranks.geojson', function (req, res) {
+app.get('/data/ranks', function (req, res) {
 
     setCross(res)
     res.sendFile(path.join(__dirname, '../data', 'ranks.geojson'));
