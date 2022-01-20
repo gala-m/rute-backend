@@ -6,13 +6,13 @@ var geoJson = require('./GeoJsonUtil')
 
 const http = require('http');
 
-const PORT = 5555
+const PORT = process.env.PORT || 5000;
 
 const server = http.createServer((req, res) => {
     res.statusCode = 200;
     res.setHeader({
         'content-type': 'text/plain', 
-        'host': 'rute-map.herokuapp.com', 
+        'host': '0.0.0.0', 
         'accept': '*'
     });
     res.end('Hello World');
