@@ -67,7 +67,8 @@ app.get('/', function (req, res) {
 app.get('/data/points', function (req, res) {
 
     setCross(res)
-    var sql = "select id,ST_AsGeoJson(geom) as geometry from draw_point;";
+
+    var sql = "select id,ST_AsGeoJson(geom) as geometry from points;";
     // var strSql = req.query.code == undefined ? sql :
     //    sql + " where code='" + req.query.code + "'";
 
