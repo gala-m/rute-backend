@@ -8,6 +8,7 @@ const pool = new Pool({
   database: process.env.DATABASE,
   idleTimeoutMillis: 0,
   connectionTimeoutMillis: 0,
+  ssl: {rejectUnauthorized: false},
 })
 
 pool.connect()
