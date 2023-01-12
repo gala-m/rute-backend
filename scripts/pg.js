@@ -6,7 +6,8 @@ const pool = new Pool({
   user: process.env.USER,
   password: process.env.PASSWORD,
   database: process.env.DATABASE,
-  idleTimeoutMillis: 30000
+  idleTimeoutMillis: 0,
+  connectionTimeoutMillis: 0,
 })
 
 pool.connect()
