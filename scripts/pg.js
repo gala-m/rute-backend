@@ -1,44 +1,17 @@
 const { Pool } = require('pg')
-require('dotenv').config();
 
 const pool = new Pool({
-  host: process.env.HOST,
-  user: process.env.USER,
-  password: process.env.PASSWORD,
-  database: process.env.DATABASE,
-  idleTimeoutMillis: 0,
-  connectionTimeoutMillis: 0,
-  ssl: {rejectUnauthorized: false},
+    host     : process.env.RDS_HOSTNAME,
+    user     : process.env.RDS_USERNAME,
+    password : process.env.RDS_PASSWORD,
+    port     : process.env.RDS_PORT,
 })
 
 pool.connect()
-/*
-pool
-    .query('SELECT * FROM points2;')
-    .catch(e => console.error(e.stack)) */
 
 var PG = function () {
     console.log( "---- READY TO CONNECT ----" );
 };
-
-    /*
-    var pgPool = new pg.Pool(pgConfig);
-    var client = new pg.Client(conString);
-
-PG.prototype.getConnection = function () {
-    client.connect(function (err) {
-        if (err) {
-            return console.error('could not connect to postgres', err);
-        }
-        client.query('SELECT * FROM points2', function (err, result) {
-            if (err) {
-                return console.error('error running query', err);
-            }
-            console.log(db  + "database connection is successful ..." );
-            console.log(result.rows[0])
-        });
-    });
-}; */
 
 //query functions 
 //@param STR query 
@@ -70,9 +43,7 @@ PG.prototype.exec = function (strSql, resHolder) {
             resHolder("err");
             console.log("exec error: " + err);
         } else {
-            // console.log("client helper: " + result)
             if (result.rows != undefined) {
-                console.log(result.rows)
                 resHolder(result.rows);
                 
             } else {
@@ -102,12 +73,6 @@ PG.prototype.save = function (tablename, column, values, geom, cb) {
 
     }
 
-
-
-    
-    console.log(name, routes, email)
-    
-    console.log("long: " + long)
     clientHelper(long, cb);
 };
 

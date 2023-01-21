@@ -1,10 +1,11 @@
-var pgclient = require('./pg')
 var express = require('express')
 const path = require("path");
 var app = express()
-var geoJson = require('./GeoJsonUtil')
 
 const http = require('http');
+
+var module  = require('../app')
+var PG = module.method2
 
 const PORT = process.env.PORT || 5000;
 
@@ -27,46 +28,11 @@ const static_path = path.join(__dirname, "public");
 app.use(express.static(static_path));
 app.use(express.urlencoded({ extended: true }));
 
-//set the cross-domain 
-function setCross(res) {
-    //settings allow cross-domain name, the domain cross-domain allows any * represents
-    res.header("Access-Control-Allow-Origin", "*");
-    //allowed type header
-    res.header("Access-Control-Allow-Headers", "content-type");
-    //cross-domain request allows manner
-    res.header("Access-Control-Allow-Methods", "DELETE,PUT,POST,GET,OPTIONS");
-}
-
-function DataToGeoJson(ds) {
-    var jsonDS = JSON.stringify(ds);
-    // console.log("jsonDS ds: "+ ds + " - " + jsonDS)
-    // the cb has the results.rows
-
-    var geojson = {
-        "type": "FeatureCollection"
-    }
-    var features = [];
-    jsonDS = eval('(' + jsonDS + ')')
-
-    for (var p in jsonDS) {
-        var PO = jsonDS[p]
-
-        var pRet = geoJson.ToGeoJson(PO);
-        // console.log("PO: " + PO)
-
-        features.push(pRet)
-    }
-    geojson.features = features;
-    return geojson;
-}
-/*
 app.get('/', function (req, res) {
     res.send('home')
-}) */
+}) 
 
 app.get('/data/points', function (req, res) {
-
-    setCross(res)
 
     var sql = "select id,ST_AsGeoJson(geom) as geometry from points;";
     // var strSql = req.query.code == undefined ? sql :
@@ -77,30 +43,25 @@ app.get('/data/points', function (req, res) {
             'Content-Type': 'text/plain; charset=utf-8'
         });
 
-            try {
-                var geojson = DataToGeoJson(ds)
+        try {
+            var geojson = DataToGeoJson(ds)
 
-                res.end(JSON.stringify(geojson));
-            } catch (error) {
-        }
+            res.end(JSON.stringify(geojson));
+        } catch (error) {}
     })
 })
 
 app.get('/data/routes3', function (req, res) {
 
-    setCross(res)
     res.sendFile(path.join(__dirname, '../data', 'routes3.geojson'));
 })
 
 app.get('/data/ranks', function (req, res) {
 
-    setCross(res)
     res.sendFile(path.join(__dirname, '../data', 'ranks.geojson'));
 })
 
 app.post('/saver', function (req, res) {
-
-    setCross(res)
 
     res.json({
         geomReceived : req.body.geom,
